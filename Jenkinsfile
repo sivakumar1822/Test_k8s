@@ -15,11 +15,19 @@ pipeline {
 
             post {
                 // If Maven was able to run the tests, even if some of the test
-                // failed, record the test results and archive the jar file.
+                // failed, record the test results and archive the jar file. add
                 success {
-                    archiveArtifacts 'target/*.jar'
+                    archiveArtifacts 'target/*.war'
                 }
             }
         }
+          stage('docker build') {
+              steps {
+                sh '''
+                docker build -t multipipeline .
+                docker run -itd -p 8081:8080 multipipeline
+                '''
+            }
+         }
     }
 }
