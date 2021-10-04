@@ -20,12 +20,14 @@ pipeline {
                     archiveArtifacts 'target/*.war'
                 }
             }
-            Docker build {
+        }
+          stage('docker build') {
+              steps {
                 sh '''
                 docker build -t Multipipeline .
                 docker run -itd -p 8080:8080 Multipipeline
                 '''
             }
-        }
+         }
     }
 }
