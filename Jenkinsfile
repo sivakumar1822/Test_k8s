@@ -21,7 +21,7 @@ pipeline {
                 }
             }
         }
-          stage('docker build') {
+          stage('docker build and Deploy') {
               steps {
                 sh '''
                 docker build -t multipipeline .
