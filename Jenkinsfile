@@ -25,7 +25,7 @@ pipeline {
               steps {
                 sh '''
                 docker build -t multipipeline-stag .
-                docker run -itd -p 8083:8080 multipipeline-stag
+                docker run -itd multipipeline-stag
                 '''
             }
          }
