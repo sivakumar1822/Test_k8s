@@ -15,7 +15,7 @@ pipeline {
 
             post {
                 // If Maven was able to run the tests, even if some of the test
-                // failed, record the test resultsof and archive the jar file add
+                // failed, record the test resultsof and archive the jar file add to
                 success {
                     archiveArtifacts 'target/*.war'
                 }
