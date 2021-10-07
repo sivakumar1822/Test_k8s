@@ -24,8 +24,8 @@ pipeline {
           stage('docker build and Deploy') {
               steps {
                 sh '''
-                docker build -t multipipeline .
-                docker run --name multipipeline-master -itd multipipeline
+                docker build -t multipipeline-master .
+                docker run -itd -p 8084:8080 multipipeline-master
                 '''
             }
          }
