@@ -16,10 +16,8 @@ pipeline {
 		}
 		stage('deploy to kuberneters'){
 			steps{
-			  	sh "chmod x changeTag.sh"
-				sh "./changeTag.sh ${DOCKER_TAG}"
 				sshagent(['SSH_SKR_BASTION']) {
-    				    sh "scp -o StrictHostKeyChecking=no services.yml tom-app-pod.yml ubuntu@13.235.78.160:/home/ubuntu"
+    				sh "scp -o StrictHostKeyChecking=no services.yml deployment.yaml ubuntu@13.235.78.160:/home/ubuntu"
 				}
 			}
 		}
