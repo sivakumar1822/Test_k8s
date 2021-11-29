@@ -1,5 +1,5 @@
 <html>
 <body>
-<h2>Hello DevOps This is master</h2>
+<h2>Hello DevOps welcome to kubernetes</h2>
 </body>
 </html>
