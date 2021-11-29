@@ -1,5 +1,9 @@
 pipeline {
-	agent any 
+	agent any
+	environment {
+		DOCKER_PWD = credentials('DockerHub')
+		
+	}
 	stages {
 		stage('build'){
 			steps{
@@ -9,7 +13,7 @@ pipeline {
 		}
 		stage('Docker build image && push'){
 			steps{
-				sh "docker login -u bskreddy18 -p ${DockerHub}"
+				sh "docker login -u bskreddy18 -p ${DOCKER_PWD}"
 				sh "docker tag tomapp:latest bskreddy18/my-repo:latest"
 				sh "docker push bskreddy18/my-repo:latest"
 			}
