@@ -5,13 +5,6 @@ pipeline {
 		ENV = develop
 	}
 	stages {
-		stage('Code Checkout'){
-			steps{
-				git credentialsId: 'GITHUB', url: 'https://github.com/sivakumar1822/petclinic.git'
-			}
-		}
-	}
-	stages {
 		stage('build'){
 			steps{
 				sh "mvn clean package"
