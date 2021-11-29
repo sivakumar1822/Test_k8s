@@ -22,8 +22,15 @@ pipeline {
 			steps{
 				sshagent(['SSH_SKR_BASTION']) {
     				sh "scp -o StrictHostKeyChecking=no services.yml deployment.yaml root@13.235.78.160:/root"
+				script{
+    				   try{
+           			       sh "ssh root@13.235.78.160 kubectl apply -f ."
+                                   }catch(error){
+                                       sh "ssh root@13.235.78.160 kubectl create -f "
+                                   }
 				}
 			}
 		}
-	}
+	   }
+      }
 }
