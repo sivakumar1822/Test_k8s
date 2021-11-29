@@ -1,19 +1,17 @@
 pipeline {
 	agent any 
-	environment{
- 	    DOCKER_TAG = getDockerTag()
-	}
 	stages {
 		stage('build'){
 			steps{
 				sh "mvn clean package"
-				sh "docker build . -t  bskreddy18/my-repo:${DOCKER_TAG}"
+				sh "docker build . -t  tomapp"
 			}
 		}
 		stage('Docker build image && push'){
 			steps{
 				sh "docker login -u bskreddy18 -p ${DockerHub}"
-				sh "docker push bskreddy18/my-repo:${DOCKER_TAG}"
+				sh "docker tag tomapp:latest bskreddy18/my-repo:latest"
+				sh "docker push bskreddy18/my-repo:latest"
 			}
 		}
 		stage('deploy to kuberneters'){
