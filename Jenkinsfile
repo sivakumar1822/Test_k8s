@@ -1,7 +1,6 @@
 pipeline {
 	agent any 
 	envinorment {
-		DOCKER_TAG = getDockerTag()
 		ENV = develop
 	}
 	stages {
