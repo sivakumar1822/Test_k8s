@@ -4,4 +4,4 @@ COPY target/*.war /usr/local/tomcat/webapps
 
 CMD ["catalina.sh", "run"]
 
-EXPOSE 8081
+EXPOSE 8080
