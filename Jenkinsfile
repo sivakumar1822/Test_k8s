@@ -21,7 +21,7 @@ pipeline {
 		stage('deploy to kuberneters'){
 			steps{
 				sshagent(['SSH_SKR_BASTION']) {
-    				sh "scp -o StrictHostKeyChecking=no services.yml deployment.yaml ubuntu@13.235.78.160:/root"
+    				sh "scp -o StrictHostKeyChecking=no services.yml deployment.yaml root@13.235.78.160:/root"
 				}
 			}
 		}
