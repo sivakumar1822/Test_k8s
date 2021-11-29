@@ -1,8 +1,5 @@
 pipeline {
 	agent any 
-	envinorment {
-		ENV = develop
-	}
 	stages {
 		stage('build'){
 			steps{
