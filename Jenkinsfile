@@ -10,7 +10,7 @@ pipeline {
 		stage('Docker build image && push'){
 			steps{
 				sh "docker login -u bskreddy18 -p bskreddy18"
-				sh "docker push docker.io/bskreddy18/tomapp:${env.BUILD_NUMBER}"
+				sh "docker push docker.io/bskreddy18/tomapp"
 			}
 		}
 		stage('deploy to kuberneters'){
