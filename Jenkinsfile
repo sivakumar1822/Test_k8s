@@ -9,7 +9,7 @@ pipeline {
 		}
 		stage('Docker build image && push'){
 			steps{
-				sh "docker login -u bskreddy18 -p bskreddy18"
+				sh "docker login -u bskreddy18 -p ${DockerHub}"
 				sh "docker tag tomapp:latest bskreddy18/my-repo:latest"
 				sh "docker push bskreddy18/my-repo:latest"
 			}
