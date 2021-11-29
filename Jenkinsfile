@@ -18,4 +18,5 @@ pipeline {
 				echo "need to setup"
 			}
 		}
+	}
 }
