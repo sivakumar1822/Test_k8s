@@ -1,33 +1,37 @@
 pipeline {
-    agent any
-
-    stages {
-        stage('Build') {
-            steps {
-                // Get some code from a GitHub repository
-
-                // Run Maven on a Unix agent.
-                sh "mvn clean package"
-
-                // To run Maven on a Windows agent, use
-                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
-            }
-
-            post {
-                // If Maven was able to run the tests, even if some of the test
-                // failed, record the test resultsof and archive the jar file add to new
-                success {
-                    archiveArtifacts 'target/*.war'
-                }
-            }
-        }
-          stage('docker build and Deploy') {
-              steps {
-                sh '''
-                docker build -t multipipeline-master .
-                docker run -itd -p 8084:8080 multipipeline-master
-                '''
-            }
-         }
-    }
+	agent any 
+	envinorment {
+		DOCKER_TAG = getDockerTag()
+		ENV = develop
+	}
+	stages {
+		stage('Code Checkout'){
+			steps{
+				git credentialsId: 'GITHUB', url: 'https://github.com/sivakumar1822/petclinic.git'
+			}
+		}
+	}
+	stages {
+		stage('build'){
+			steps{
+				sh "mvn clean package"
+				sh "docker build . -t  ${ENV}"
+			}
+		}
+	}
+	stages {
+		stage('Docker build image && push'){
+			steps{
+				sh "docker login -u bskreddy18 -p ${DOCKER_HUB}"
+				sh "docker push ${ENV}:latest"
+			}
+		}
+	}
+	stages {
+		stage('deploy to kuberneters'){
+			steps{
+				echo "need to setup"
+			}
+		}
+	}
 }
